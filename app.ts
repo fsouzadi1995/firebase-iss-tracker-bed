@@ -25,15 +25,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-console.warn({
-  apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGE_SENDER_ID,
-  appId: process.env.APP_ID,
-});
-
 const fbase = firebase.initializeApp({
   apiKey: process.env.API_KEY,
   authDomain: process.env.AUTH_DOMAIN,
@@ -47,8 +38,6 @@ const db = fbase.firestore();
 
 setInterval(() => {
   fetch('http://api.open-notify.org/iss-now.json').then(async (res) => {
-    console.log('inside interval!');
-
     const location = await res.json();
 
     const doc = db.collection('locations').doc(String(location.timestamp));
