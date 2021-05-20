@@ -44,7 +44,7 @@ setInterval(() => {
 
     doc.set(location);
   });
-}, 5000);
+}, 30000);
 
 app.use('/', indexRouter);
 
